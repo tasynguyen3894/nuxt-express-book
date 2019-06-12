@@ -38,7 +38,8 @@ function findById(req, res, next) {
         })
         return false;
     }
-    Story.findById(storyId).populate('category_id').populate('chaps.content_id').exec(function (err, doc) {
+    let storyQuery = storyRepository.findById(storyId, req.query, 1)
+    storyQuery.exec(function (err, doc) {
         if(doc) {
             res.status(200)
             res.json({
@@ -83,7 +84,6 @@ function findGuess(req, res, next) {
     let storyQuery = storyRepository.find(req.query, 1)
     storyQuery.exec(function (err, data) {
         if(err) {
-            console.log(err)
             res.status(404)
             res.json({
                 message: err
@@ -95,6 +95,32 @@ function findGuess(req, res, next) {
             stories: storyHelper.modelTransform(data)
         })
         return true
+    })
+}
+
+function findByIdGuess(req, res, next) {
+    var storyId = req.params.storyId
+    if(!storyId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+    let storyQuery = storyRepository.findById(storyId, req.query, 1)
+    storyQuery.exec(function (err, doc) {
+        if(doc) {
+            res.status(200)
+            res.json({
+                story: storyHelper.modelTransform(doc)
+            })
+            return true
+        }
+        res.status(404)
+        res.json({
+            message: 'story not found'
+        })
+        return false
     })
 }
 
@@ -161,5 +187,6 @@ module.exports = {
     edit: edit,
     findById: findById,
     remove: remove,
-    index: findGuess
+    index: findGuess,
+    findByIdGuess: findByIdGuess
 }

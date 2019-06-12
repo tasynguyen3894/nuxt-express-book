@@ -1,6 +1,9 @@
 const storyHelper = require('../helpers/story.helper')
 const Story = require('../models/story.model')
-const relateList = ["category_id", "chaps.content_id"]
+const relateList = {
+    category: "category_id",
+    chap_content: "chaps.content_id"
+}
 
 function filterSearch(params) {
     let filter = {}
@@ -40,8 +43,8 @@ function filterSearch(params) {
 
 function relationship(query, relates) {
     relates.forEach(relate => {
-        if(relateList.indexOf(relate) > -1) {
-            query.populate(relate)
+        if(relateList[relate]) {
+            query.populate(relateList[relate])
         }
     })
     return query
@@ -49,13 +52,21 @@ function relationship(query, relates) {
 
 function find(params, options) {
     params = storyHelper.formatRequest(params)
-    let storyModel = Story.find(filterSearch(params));
-    storyModel = relationship(storyModel, ["category_id", "chaps.content_id"])
-    storyModel = storyHelper.pagination(storyModel, params)
+    let storyModel = Story.find(filterSearch(params.params));
+    storyModel = relationship(storyModel, params.relation)
+    storyModel = storyHelper.pagination(storyModel, params.pagination)
+    return storyModel;
+}
+
+function findById(id, params, options) {
+    params = storyHelper.formatRequest(params)
+    let storyModel = Story.findById(id);
+    storyModel = relationship(storyModel, params.relation)
     return storyModel;
 }
 
 
 module.exports = {
-    find: find
+    find: find,
+    findById: findById
 }

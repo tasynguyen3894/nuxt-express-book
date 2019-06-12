@@ -4,7 +4,7 @@ const storyController = require('../../controllers/story.controller')
 const chapRouter = require('./chap.router')
 
 route.get('/', storyController.index)
-route.get('/:storyId', storyController.findById)
+route.get('/:storyId', storyController.findByIdGuess)
 
 route.use(chapRouter)
 

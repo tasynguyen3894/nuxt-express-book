@@ -34,9 +34,6 @@ export default {
     Logo
   },
   mounted() {
-    categorySerivce.get('http://localhost:3000/api/guess/categories').then(function (res) {
-      console.log(res.data)
-    })
   }
 }
 </script>

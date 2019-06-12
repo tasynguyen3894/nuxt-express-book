@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const storyRouter = require('./admin/story.router')
+const storyRouter = require('./guess/story.router')
 const contentRouter = require('./admin/content.router')
 const categoryRouter = require('./admin/category.router')
 

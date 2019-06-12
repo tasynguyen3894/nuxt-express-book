@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nuxt-link :to="{name: 'categories'}">Categories</nuxt-link>
     <nuxt />
   </div>
 </template>

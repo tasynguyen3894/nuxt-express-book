@@ -2,7 +2,11 @@
     <div>
         {{ id }} - {{ category.name }}
         <ul>
-           <li :key="story.id" v-for="story in stories">{{ story.name }}</li>
+           <li :key="story.id" v-for="story in stories">
+               <nuxt-link :to="{name: 'stories-story_id', params: {story_id: story.id} }">
+                   {{ story.name }}
+               </nuxt-link>
+            </li>
        </ul>
     </div>
 </template>

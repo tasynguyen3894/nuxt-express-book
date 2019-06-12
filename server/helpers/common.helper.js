@@ -1,3 +1,8 @@
+const paramKey = {
+    pagination: ['limit', 'page'],
+    relation: 'relation'
+}
+
 function modelTransform(model) {
     if(typeof model.toObject !== "undefined") {
         model = model.toObject()
@@ -29,12 +34,24 @@ function pagination(query, params) {
 }
 
 function formatRequest(req) {
+    let reqFormated = {
+        params: {},
+        pagination: {},
+        relation: []
+    }
     Object.keys(req).forEach(key => {
         if(typeof req[key] === "string") {
             req[key] = req[key].toLowerCase().trim()
         }
+        if(paramKey.pagination.indexOf(key) > -1) {
+            reqFormated.pagination[key] = req[key]
+        } else if(paramKey.relation == key) {
+            reqFormated.relation = req[key].split(",")
+        } else {
+            reqFormated.params[key] = req[key]
+        }
     })
-    return req
+    return reqFormated
 }
 
 module.exports = {

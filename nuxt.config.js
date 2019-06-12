@@ -1,9 +1,10 @@
 const pkg = require('./package')
 
-
 module.exports = {
   mode: 'universal',
-
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
   /*
   ** Headers of the page
   */
@@ -22,7 +23,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#333' },
 
   /*
   ** Global CSS
@@ -34,8 +35,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // '~/plugins/axios'
   ],
-
   /*
   ** Nuxt.js modules
   */
