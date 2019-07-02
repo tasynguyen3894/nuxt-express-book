@@ -2,27 +2,32 @@ const commonHelper = require('./common.helper')
 const categoryHelper = require('./category.helper')
 const chapHelper = require('./chap.helper')
 
-function singleTransform(data) {
+function singleTransform(data, options) {
     data = commonHelper.modelTransform(data)
     if(typeof data.category_id == 'object' && typeof data.category_id._bsontype == "undefined") {
         data.category = categoryHelper.modelTransform(data.category_id)
         delete data.category_id
     }
     if(typeof data.chaps != "undefined") {
+        if(typeof options.role === 'undefined' || options.role != 'admin') {
+            data.chaps = data.chaps.filter(function (chap) {
+                return chap.published_at
+            })
+        }
         data.chaps = chapHelper.modelTransform(data.chaps)
     }
     return data
 }
 
-function modelTransform(data) {
+function modelTransform(data, options) {
     
     if(typeof data == 'object') {
         if(data.constructor === Array) {
             return data.map(function (item) {
-                return singleTransform(item)
+                return singleTransform(item, options)
             })
         } else {
-            return singleTransform(data)
+            return singleTransform(data, options)
         }
     }
     
@@ -31,6 +36,11 @@ function modelTransform(data) {
 
 function formatRequest(params) {
     return commonHelper.formatRequest(params)
+}
+
+function policyFilter(params, options, filter) {
+    filter = commonHelper.policyFilter(options, filter);
+    return filter
 }
 
 function filterSearch(params) {
@@ -76,5 +86,6 @@ module.exports = {
     modelTransform: modelTransform,
     filterSearch: filterSearch,
     pagination: pagination,
-    formatRequest: formatRequest
+    formatRequest: formatRequest,
+    policyFilter: policyFilter
 }

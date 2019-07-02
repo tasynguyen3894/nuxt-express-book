@@ -10,6 +10,10 @@ const noteSchema = new Schema({
         type: String,
         required: true
     },
+    published_at: {
+        type: Date,
+        required: false
+    }
 }, {
     timestamps: {
         createdAt: 'created_at',

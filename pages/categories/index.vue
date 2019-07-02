@@ -15,12 +15,12 @@ import categorySerivce from '~/service/category.service'
 export default {
     async asyncData({params, $axios, redirect}) {
         try {
-            var categoryDoc = await categorySerivce.get($axios);
+            var categoryDoc = await categorySerivce.get();
             
         } catch (error) {
         }
         return {
-            categories: categoryDoc.categories
+            categories: categoryDoc.data.categories
         }
     }
 }

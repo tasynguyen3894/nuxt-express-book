@@ -33,6 +33,15 @@ function pagination(query, params) {
     return query
 }
 
+function policyFilter(options, filter) {
+    if(typeof options.role === 'undefined' || options.role != 'admin') {
+        filter['published_at'] = {
+            $ne: null
+        }
+    }
+    return filter
+}
+
 function formatRequest(req) {
     let reqFormated = {
         params: {},
@@ -57,5 +66,6 @@ function formatRequest(req) {
 module.exports = {
     modelTransform: modelTransform,
     pagination: pagination,
-    formatRequest: formatRequest
+    formatRequest: formatRequest,
+    policyFilter: policyFilter
 }

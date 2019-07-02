@@ -12,6 +12,10 @@ const categorySchema = new Schema({
         type: String,
         require: true,
         unique: true
+    },
+    published_at: {
+        type: Date,
+        required: false
     }
 }, {
     timestamps: {

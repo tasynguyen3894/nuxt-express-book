@@ -38,12 +38,12 @@ function findById(req, res, next) {
         })
         return false;
     }
-    let storyQuery = storyRepository.findById(storyId, req.query, 1)
+    let storyQuery = storyRepository.findById(storyId, req.query, {role: 'admin'})
     storyQuery.exec(function (err, doc) {
         if(doc) {
             res.status(200)
             res.json({
-                story: storyHelper.modelTransform(doc)
+                story: storyHelper.modelTransform(doc[0], {role: 'admin'})
             })
             return true
         }
@@ -52,6 +52,58 @@ function findById(req, res, next) {
             message: 'story not found'
         })
         return false
+    })
+}
+
+function publish(req, res, next) {
+    var storyId = req.params.storyId
+    if(!storyId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    Story.findByIdAndUpdate(storyId, {published_at: new Date()}, {new: true}, function (errUpdate, dataUpdate) {
+        if(errUpdate) {
+            res.status(422)
+            res.json({
+                message: 'system error'
+            })
+            return
+        }
+        res.status(200)
+        res.json({
+            message: 'Publish complete'
+        })
+        return true
+    })
+}
+
+function unpublish(req, res, next) {
+    var storyId = req.params.storyId
+    if(!storyId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    Story.findByIdAndUpdate(storyId, {published_at: null}, {new: true}, function (errUpdate, dataUpdate) {
+        if(errUpdate) {
+            res.status(422)
+            res.json({
+                message: 'system error'
+            })
+            return
+        }
+        res.status(200)
+        res.json({
+            message: 'Unpublish complete'
+        })
+        return true
     })
 }
 
@@ -92,7 +144,7 @@ function findGuess(req, res, next) {
         }
         res.status(200)
         res.json({
-            stories: storyHelper.modelTransform(data)
+            stories: storyHelper.modelTransform(data, {role: 'guess'})
         })
         return true
     })
@@ -107,12 +159,12 @@ function findByIdGuess(req, res, next) {
         })
         return false;
     }
-    let storyQuery = storyRepository.findById(storyId, req.query, 1)
+    let storyQuery = storyRepository.findById(storyId, req.query, {role: 'guess'})
     storyQuery.exec(function (err, doc) {
         if(doc) {
             res.status(200)
             res.json({
-                story: storyHelper.modelTransform(doc)
+                story: storyHelper.modelTransform(doc[0], {role: 'guess'})
             })
             return true
         }
@@ -125,18 +177,18 @@ function findByIdGuess(req, res, next) {
 }
 
 function findAdmin(req, res, next) {
-    let storyQuery = storyRepository.find(req.query, 1)
+    let storyQuery = storyRepository.find(req.query, {role: 'admin'})
     storyQuery.exec(function (err, data) {
         if(err) {
             res.status(404)
             res.json({
-                message: 'error'
+                message: err
             })
             return false
         }
         res.status(200)
         res.json({
-            stories: storyHelper.modelTransform(data)
+            stories: storyHelper.modelTransform(data, {role: 'admin'})
         })
         return true
     })
@@ -188,5 +240,8 @@ module.exports = {
     findById: findById,
     remove: remove,
     index: findGuess,
-    findByIdGuess: findByIdGuess
+    findAdmin: findAdmin,
+    findByIdGuess: findByIdGuess,
+    publish: publish,
+    unpublish: unpublish
 }

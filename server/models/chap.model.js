@@ -13,6 +13,10 @@ const chapSchema = new Schema({
     content_id: {
         type: Schema.Types.ObjectId,
         ref: 'Content'
+    },
+    published_at: {
+        type: Date,
+        required: false
     }
 }, {
     timestamps: {

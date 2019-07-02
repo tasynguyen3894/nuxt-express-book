@@ -10,19 +10,39 @@
             <input type="password" v-model="password">
         </div>
         <div>
-            <button type="button">Login</button>
+            <button type="button" @click="login">Login</button>
         </div>
     </div>
 </template>
 <script>
-
+const Cookie = process.client ? require('js-cookie') : undefined
+import authService from '~/service/auth.service'
 
 export default {
-    layout: 'empty',
+    layout: 'admin',
+    middleware: 'nonAuthenticated',
     data() {
         return {
             email: '',
             password: ''
+        }
+    },
+    methods: {
+        login() {
+            let _this = this
+            _this.$store.commit('setAuth', {token: 'đsdssds'})
+            console.log(this.$store.state.auth)
+            authService.login(this.$axios, this.email, this.password).then(function (response) {
+                let { status, data } = response
+                if(status == 200 && data.token) {
+                    let auth = {
+                        token: data.token
+                    }
+                    _this.$store.commit('setAuth', auth)
+                    Cookie.set('auth', auth)
+                    _this.$router.push('/admin')
+                }
+            })
         }
     }
 }

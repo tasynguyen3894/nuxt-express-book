@@ -14,6 +14,10 @@ const storySchema = new Schema({
         type: String,
         required: true
     },
+    published_at: {
+        type: Date,
+        required: false
+    },
     category_id: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
@@ -36,6 +40,7 @@ storySchema.pre('remove', function (next) {
     story.deleted_at= currentDate;
     next();
 })
+
 
 storySchema.method('transform', function() {
     var obj = this.toObject();

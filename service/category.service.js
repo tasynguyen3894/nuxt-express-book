@@ -1,7 +1,8 @@
-
+import utilService from './util.service'
+import axios from 'axios'
 
 export default {
-    get: function (axios) {
-        return axios.$get('guess/categories');
+    get: function () {
+        return axios.get(utilService.baseUrl + '/guess/categories');
     }
 }

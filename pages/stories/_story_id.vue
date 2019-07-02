@@ -2,9 +2,6 @@
     <div>
         <div>{{ story.name }}</div>
         <div>
-            <div>
-                <input type="text">
-            </div>
             <ul>
                 <li :key="chap.id" v-for="chap in story.chaps">
                     <nuxt-link :to="{name: 'stories-story_id-chaps-chap_id', params: {story_id: story_id, chap_id: chap.id} }">
@@ -24,12 +21,12 @@ export default {
         
         try {
             let dataStory = await storySerivce.getById($axios, params.story_id)
-            dataStory.story.chaps = dataStory.story.chaps.sort(function (a, b) {
+            dataStory.data.story.chaps = dataStory.data.story.chaps.sort(function (a, b) {
                 return a.page - b.page
             })
             return {
                 story_id: params.story_id,
-                story: dataStory.story
+                story: dataStory.data.story
             }
         } catch (err) {
             redirect('/')

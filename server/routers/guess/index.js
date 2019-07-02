@@ -1,7 +1,7 @@
 const { Router } = require('express')
-const storyRouter = require('./guess/story.router')
-const contentRouter = require('./admin/content.router')
-const categoryRouter = require('./admin/category.router')
+const storyRouter = require('./story.router')
+const contentRouter = require('./content.router')
+const categoryRouter = require('./category.router')
 
 const router = Router()
 router.use('/stories', storyRouter)

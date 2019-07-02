@@ -1,4 +1,5 @@
 const User = require('../models/user.model')
+const userHelper = require('../helpers/user.helper')
 const jwt = require('jsonwebtoken')
 
 function register(req, res, next) {
@@ -23,7 +24,7 @@ function login(req, res, next) {
     User.authenticate(req.body.email, req.body.password, function (data, user) {
         res.status(data.status)
         if(data.status == 200) {
-            res.json({ user: user, status: data.status, token: data.token })
+            res.json({ user: userHelper.modelTransform(user), token: data.token })
         } else {
             res.json({ message: 'Error', status: data.status })
         }

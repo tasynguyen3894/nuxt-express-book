@@ -16,7 +16,7 @@ export default {
         } catch (error) {
         }
         return {
-            stories: storyDoc.stories
+            stories: storyDoc.data.stories
         }
     }
 }

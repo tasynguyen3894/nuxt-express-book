@@ -15,12 +15,12 @@ export default {
     async asyncData({params, $axios, redirect}) {
         
         try {
-            let dataCategory = await $axios.$get('/guess/categories/' + params.id)
-            let dataStory = await $axios.$get('/guess/stories?category_id=' + params.id)
+            let dataCategory = await $axios.get('/guess/categories/' + params.id)
+            let dataStory = await $axios.get('/guess/stories?category_id=' + params.id)
             return {
                 id: params.id,
-                category: dataCategory.category,
-                stories: dataStory.stories
+                category: dataCategory.data.category,
+                stories: dataStory.data.stories
             }
         } catch (err) {
             redirect('/')
@@ -28,7 +28,6 @@ export default {
         
     },
     mounted() {
-        console.log(this.$route.params.id)
     }
 }
 </script>

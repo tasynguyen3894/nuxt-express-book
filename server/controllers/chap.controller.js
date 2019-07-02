@@ -81,7 +81,7 @@ async function create(req, res, next) {
     return
 }
 
-async function edit(req, res, next) {
+function edit(req, res, next) {
     var storyId = req.params.storyId
     var chapId = req.params.chapId
     if(!storyId || !chapId) {
@@ -128,6 +128,83 @@ async function edit(req, res, next) {
     })
 }
 
+function publish(req, res, next) {
+    var storyId = req.params.storyId
+    var chapId = req.params.chapId
+    if(!storyId || !chapId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    Story.findOneAndUpdate({_id: storyId, chaps: {$elemMatch: {_id: chapId}}}, {
+        $set: {
+            "chaps.$.published_at": new Date()
+        }
+    },
+    {
+        useFindAndModify: false,
+        new: true
+    },
+    function (err, doc) {
+        if(err) {
+            res.status(422)
+            res.json({
+                message: err
+            })
+            return
+        }
+        let chap = chapHelper.modelTransform(doc.chaps).filter(function (chap) {
+            return chap.id == chapId
+        });
+        res.status(200)
+        res.json({
+            chap: chap[0]
+        })
+        return true
+    })
+}
+
+function unpublish(req, res, next) {
+    var storyId = req.params.storyId
+    var chapId = req.params.chapId
+    if(!storyId || !chapId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    Story.findOneAndUpdate({_id: storyId, chaps: {$elemMatch: {_id: chapId}}}, {
+        $set: {
+            published_at: null
+        }
+    },
+    {
+        useFindAndModify: false,
+        new: true
+    },
+    function (err, doc) {
+        if(err) {
+            res.status(422)
+            res.json({
+                message: err
+            })
+            return
+        }
+        let chap = doc.transform().chaps.filter(function (chap) {
+            return chap.id == chapId
+        });
+        res.status(200)
+        res.json({
+            chap: chap[0]
+        })
+        return true
+    })
+}
 
 function remove(req, res, next) {
     var storyId = req.params.storyId
@@ -196,5 +273,7 @@ module.exports = {
     findById: findById,
     create: create,
     edit: edit,
-    remove: remove
+    remove: remove,
+    unpublish: unpublish,
+    publish: publish
 }
