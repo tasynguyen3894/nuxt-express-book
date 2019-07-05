@@ -44,7 +44,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: "http://localhost:3000/api"
+    baseURL: "http://localhost:4000/api"
   },
   /*
   ** Build configuration
@@ -55,5 +55,10 @@ module.exports = {
     */
     extend(config, ctx) {
     }
-  }
+  },
+
+  server: {
+    port: 4000, // default: 3000
+    host: 'localhost', // default: localhost
+  },
 }
