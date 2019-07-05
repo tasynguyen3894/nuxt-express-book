@@ -30,9 +30,7 @@ export default {
     methods: {
         login() {
             let _this = this
-            _this.$store.commit('setAuth', {token: 'đsdssds'})
-            console.log(this.$store.state.auth)
-            authService.login(this.$axios, this.email, this.password).then(function (response) {
+            authService.login(this.email, this.password).then(function (response) {
                 let { status, data } = response
                 if(status == 200 && data.token) {
                     let auth = {
