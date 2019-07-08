@@ -16,7 +16,6 @@ export default {
     async asyncData({params, $axios, redirect}) {
         try {
             var categoryDoc = await categorySerivce.get();
-            
         } catch (error) {
         }
         return {
