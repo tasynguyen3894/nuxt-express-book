@@ -1,6 +1,8 @@
 <template>
     <div>
         <div v-if="$store.state.auth">
+            <nuxt-link :to="{name: 'admin'}">Admin</nuxt-link>
+            <nuxt-link :to="{name: 'admin-categories'}">Categories</nuxt-link>
             <span @click="logout">Log Out</span>
         </div>
     </div>

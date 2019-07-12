@@ -11,7 +11,7 @@ import storySerivce from '~/service/story.service'
 export default {
     async asyncData({params, $axios, redirect}) {
         try {
-            var storyDoc = await storySerivce.get($axios);
+            var storyDoc = await storySerivce.get();
             
         } catch (error) {
         }
