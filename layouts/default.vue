@@ -1,12 +1,17 @@
 <template>
   <div>
     <nuxt-link :to="{name: 'index'}">
-      TasyBook 1.0 
+      TasyBook test deploy
     </nuxt-link>
     <nuxt-link :to="{name: 'categories'}">Categories</nuxt-link>
     <nuxt />
   </div>
 </template>
+<script>
+export default {
+  
+}
+</script>
 
 <style>
 
