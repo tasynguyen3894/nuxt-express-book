@@ -84,3 +84,6 @@ dist
 sw.*
 
 deploy.sh
+
+deploy/build.sh
+deploy/deploy.sh
