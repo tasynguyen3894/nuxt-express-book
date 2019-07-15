@@ -1,10 +1,10 @@
 #!/bin/bash
 
 USER=root
-APP_DIR=/Users/admin/projects/product/tasybook/tasybook
-GIT_REMOTE=origin
-GET_BRANCH=master
-PM2_NAME=TasyNuxt
+APP_DIR=
+GIT_REMOTE=
+GET_BRANCH=
+PM2_NAME=
 
 sudo su - $USER << EOF
     cd $APP_DIR
