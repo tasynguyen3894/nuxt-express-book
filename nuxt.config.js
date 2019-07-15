@@ -29,14 +29,14 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: ["~/node_modules/bootstrap/dist/css/bootstrap.css"],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~plugins/bootstrap.js'
   ],
   /*
   ** Nuxt.js modules
@@ -54,6 +54,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: ["jquery", "bootstrap"],
     extend(config, ctx) {
     }
   },
