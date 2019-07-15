@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const path = require('path')
 require('dotenv').config()
 
 module.exports = {
@@ -29,14 +30,13 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ["~/node_modules/bootstrap/dist/css/bootstrap.css"],
+  css: ['~assets/css/tailwind.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/axios',
-    '~plugins/bootstrap.js'
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js modules
@@ -54,7 +54,11 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    vendor: ["jquery", "bootstrap"],
+    postcss: {
+      plugins: {
+        tailwindcss: path.resolve(__dirname, './tailwind.config.js')
+      }
+    },
     extend(config, ctx) {
     }
   },
