@@ -15,6 +15,9 @@
         </ul>
       </div>
       <div class="flex w-4/5">
+        <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line">
+
+        </div>
         <nuxt-child/>
       </div>
     </div>
