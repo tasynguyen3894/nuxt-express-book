@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <nuxt-link :to="{name: 'index'}">
-      <span class="text-lg">TasyBook 1.0</span>
-    </nuxt-link>
-    <nuxt-link :to="{name: 'categories'}">Categories</nuxt-link>
-    <nuxt />
+  <div class="">
+    <DefaultHeader />
+    <div class="container mx-auto px-20">
+      <nuxt />
+    </div>
+    <DefaultFooter />
   </div>
 </template>
 <script>
+import DefaultHeader from '~/components/template/DefaultHeader'
+import DefaultFooter from '~/components/template/DefaultFooter'
+
 export default {
-  
+  components: {
+    DefaultHeader,
+    DefaultFooter
+  }
 }
 </script>
 
