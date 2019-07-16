@@ -6,7 +6,7 @@
           <nuxt-link
             :to="{name: 'index'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >Tasy book 1.0</nuxt-link>
+          >Tasy book (Beta)</nuxt-link>
           <nuxt-link
             :to="{name: 'categories'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
@@ -20,8 +20,13 @@
           <a
             href="https://github.com/tasynguyen3894/nuxt-express-book"
             target="_blank"
-            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-black border-white hover:border-black hover:text-black hover:bg-white mt-4 lg:mt-0"
           >Github</a>
+          <a
+            href="https://twitter.com/tasyit"
+            target="_blank"
+            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-twitter border-white hover:border-twitter hover:text-twitter hover:bg-white mt-4 lg:mt-0"
+          >Twitter</a>
         </div>
       </div>
     </nav>

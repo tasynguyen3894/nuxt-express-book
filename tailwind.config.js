@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         cyan: '#9cdbff',
+        twitter: '#00acee'
       },
       margin: {
         '96': '24rem',
