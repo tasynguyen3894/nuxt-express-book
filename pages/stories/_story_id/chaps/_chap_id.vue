@@ -1,10 +1,17 @@
 <template>
-    <div>
-        <div>{{ chap_id }}</div>
-        <div v-if="chap.content">
-            {{ chap.content.text }}
-            <div :key="note.id" v-for="note in chap.content.notes">
-                <b>{{ note.title }}:</b> <span>{{ note.text }}</span>
+    <div class="w-full">
+        <h4 class="text-2xl mb-5">{{ chap.name }}</h4>
+        <div v-if="chap.content" >
+            <div class="text-md my-4">
+                {{ chap.content.text }}
+            </div>
+            <ul class="px-5">
+                <li class="text-md" :key="note.id" v-for="note in chap.content.notes">
+                    <b>{{ note.title }}:</b> <span>{{ note.text }}</span>
+                </li>
+            </ul>
+            <div class="text-right mt-10 text-sm">
+                {{ chap.page }}
             </div>
         </div>
     </div>

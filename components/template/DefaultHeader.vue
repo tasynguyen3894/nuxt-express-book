@@ -1,6 +1,6 @@
 <template>
   <div class=" bg-teal-500">
-    <nav class="container mx-auto px-20 flex items-center justify-between flex-wrap  p-6">
+    <nav class="container mx-auto w-950 flex items-center justify-between flex-wrap  py-4 mb-4">
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow">
           <nuxt-link
