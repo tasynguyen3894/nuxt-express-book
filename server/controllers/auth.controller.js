@@ -44,15 +44,15 @@ function index(req, res, next) {
 }
 
 function user(req, res, next) {
-    if(!req.headers.tasy-book-token) {
+    if(!req.headers['tasy-book-token']) {
         res.status(401)
         res.json({
             message: 'token missing'
         })
         return false
     }
-    let tasy-book-token = req.headers.tasy-book-token
-    let decodeInfo = jwt.verify(tasy-book-token, process.env.secret_key)
+    let tasyBookToken = req.headers['tasy-book-token']
+    let decodeInfo = jwt.verify(tasyBookToken, process.env.secret_key)
     if(!decodeInfo || !decodeInfo.email) {
         res.status(401)
         res.json({
