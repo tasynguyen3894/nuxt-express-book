@@ -124,10 +124,64 @@ function edit(req, res, next) {
     })
 }
 
+function publish(req, res, next) {
+    var categoryId = req.params.categoryId
+    if(!categoryId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    CategoryModel.findByIdAndUpdate(categoryId, {published_at: new Date()}, {new: true}, function (errUpdate, dataUpdate) {
+        if(errUpdate) {
+            res.status(422)
+            res.json({
+                message: 'system error'
+            })
+            return
+        }
+        res.status(200)
+        res.json({
+            message: 'Publish complete'
+        })
+        return true
+    })
+}
+
+function unpublish(req, res, next) {
+    var categoryId = req.params.categoryId
+    if(!categoryId) {
+        res.status(400)
+        res.json({
+            message: 'Bad request'
+        })
+        return false;
+    }
+
+    CategoryModel.findByIdAndUpdate(categoryId, {published_at: null}, {new: true}, function (errUpdate, dataUpdate) {
+        if(errUpdate) {
+            res.status(422)
+            res.json({
+                message: 'system error'
+            })
+            return
+        }
+        res.status(200)
+        res.json({
+            message: 'Unpublish complete'
+        })
+        return true
+    })
+}
+
 module.exports = {
     create: create,
     edit: edit,
     findById: findById,
     remove: remove,
-    index: index
+    index: index,
+    unpublish: unpublish,
+    publish: publish
 }
