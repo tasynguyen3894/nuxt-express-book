@@ -6,7 +6,7 @@
           <nuxt-link
             :to="{name: 'index'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >Tasy book</nuxt-link>
+          >Tasy book 1.0</nuxt-link>
           <nuxt-link
             :to="{name: 'categories'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
