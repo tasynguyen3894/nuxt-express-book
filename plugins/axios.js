@@ -4,6 +4,6 @@ export default function ({ $axios, store, redirect }) {
         return res;
     })
     $axios.onRequest((config) => {
-        // config.headers.common['_token'] = store.state.auth.token ? store.state.auth.token : null
+        // config.headers.common['tasy-book-token'] = store.state.auth.token ? store.state.auth.token : null
    })
 }
