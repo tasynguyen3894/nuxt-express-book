@@ -1,9 +1,17 @@
 <template>
   <div>
-    <h1 class="text-3xl py-2">{{ story.name }}</h1>
+    <h1 class="text-3xl px-2">{{ story.name }}</h1>
     <div class="flex border-t">
       <div class="flex w-1/5 border-gray-400 border-r py-2 pl-2 mr-5">
         <ul class="block w-full">
+          <li>
+            <nuxt-link
+              @click="changeChapId(chap.id)"
+              v-bind:class="[!chap_id ? 'text-teal-500' : '']"
+              class="px-1 hover:text-teal-500 block"
+              :to="{name: 'stories-story_id', params: {story_id: story_id} }"
+            >Giới thiệu</nuxt-link>
+          </li>
           <li :key="chap.id" v-for="chap in story.chaps">
             <nuxt-link
               @click="changeChapId(chap.id)"
@@ -15,7 +23,7 @@
         </ul>
       </div>
       <div class="flex w-4/5">
-        <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line">
+        <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line py-2 w-full">
 
         </div>
         <nuxt-child/>
