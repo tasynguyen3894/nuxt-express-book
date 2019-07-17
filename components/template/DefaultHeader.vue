@@ -11,10 +11,10 @@
             :to="{name: 'categories'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >Categories</nuxt-link>
-          <a
-            href="#responsive-header"
-            class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-          >About</a>
+          <nuxt-link
+            :to="{name: 'about'}"
+            class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          >About</nuxt-link>
         </div>
         <div>
           <a

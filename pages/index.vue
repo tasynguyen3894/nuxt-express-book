@@ -1,14 +1,11 @@
 <template>
-    <div>
-        <div :key="story.id" v-for="story in stories">
-            <nuxt-link :to="{name: 'stories-story_id', params: {story_id: story.id} }">
-                   {{ story.name }}
-            </nuxt-link>
-        </div>
+    <div class="w-full">
+        <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
     </div>
 </template>
 <script>
 import storySerivce from '~/service/story.service'
+import Story from '~/components/template/Story'
 
 export default {
     async asyncData({params, $axios, redirect}) {
@@ -28,6 +25,9 @@ export default {
                 stories: []
             }
         }
+    },
+    components: {
+        Story
     }
 }
 </script>
