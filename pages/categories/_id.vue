@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ id }} - {{ category.name }}
+        {{ category.name }}
         <ul>
            <li :key="story.id" v-for="story in stories">
                <nuxt-link :to="{name: 'stories-story_id', params: {story_id: story.id} }">

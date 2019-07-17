@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-3xl px-2">{{ story.name }}</h1>
     <div class="flex border-t">
-      <div class="flex w-1/5 border-gray-400 border-r py-2 pl-2 mr-5">
+      <div class="flex w-1/5 border-gray-400 py-2 pl-2">
         <ul class="block w-full">
           <li>
             <nuxt-link
@@ -16,13 +16,13 @@
             <nuxt-link
               @click="changeChapId(chap.id)"
               v-bind:class="[chap.id == chap_id ? 'text-teal-500' : '']"
-              class="px-1 hover:text-teal-500 block"
+              class="px-1 my-2 hover:text-teal-500 block"
               :to="{name: 'stories-story_id-chaps-chap_id', params: {story_id: story_id, chap_id: chap.id} }"
             >{{ chap.name }}</nuxt-link>
           </li>
         </ul>
       </div>
-      <div class="flex w-4/5">
+      <div class="flex w-4/5 border-l mr-5 pl-2">
         <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line py-2 w-full">
 
         </div>
