@@ -8,6 +8,11 @@ import storySerivce from '~/service/story.service'
 import Story from '~/components/template/Story'
 
 export default {
+    head() {
+        return {
+            title: 'Home | Tasy Book'
+        }
+    },
     async asyncData({params, $axios, redirect}) {
         try {
             let dataStory = await storySerivce.get({relation: "category,user"})

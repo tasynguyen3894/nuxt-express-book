@@ -1,6 +1,12 @@
 <template>
   <div>
     <h1 class="text-3xl px-2">{{ story.name }}</h1>
+    <nuxt-link
+      v-if="story.user"
+      class="px-3 hover:text-teal-500 block py-2 text-md"
+      :to="{name: 'users-user_id', params: {user_id: story.user.id} }"
+      v-text="story.user.username"
+    ></nuxt-link>
     <div class="flex border-t">
       <div class="flex w-1/5 border-gray-400 py-2 pl-2">
         <ul class="block w-full">
@@ -23,9 +29,7 @@
         </ul>
       </div>
       <div class="flex w-4/5 border-l mr-5 pl-2">
-        <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line py-2 w-full">
-
-        </div>
+        <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line py-2 w-full"></div>
         <nuxt-child/>
       </div>
     </div>
@@ -35,9 +39,16 @@
 import storySerivce from "~/service/story.service";
 
 export default {
+  head() {
+      return {
+          title: this.story.name + ' | Story | Tasy Book'
+      }
+  },
   async asyncData({ params, $axios, redirect }) {
     try {
-      let dataStory = await storySerivce.getById($axios, params.story_id);
+      let dataStory = await storySerivce.getById(params.story_id, {
+        relation: "category,user"
+      });
       dataStory.data.story.chaps = dataStory.data.story.chaps.sort(function(
         a,
         b

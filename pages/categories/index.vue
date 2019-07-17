@@ -13,6 +13,11 @@
 import categorySerivce from '~/service/category.service'
 
 export default {
+    head() {
+        return {
+            title: 'Category | Tasy Book'
+        }
+    },
     async asyncData({params, $axios, redirect}) {
         try {
             var categoryDoc = await categorySerivce.get();

@@ -11,6 +11,11 @@ import Story from '~/components/template/Story'
 import storySerivce from '~/service/story.service'
 
 export default {
+    head() {
+        return {
+            title: this.category.name + ' | Categories | Tasy Book'
+        }
+    },
     async asyncData({params, $axios, redirect}) {
         
         try {
