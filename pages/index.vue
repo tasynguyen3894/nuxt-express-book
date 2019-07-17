@@ -10,7 +10,7 @@ import Story from '~/components/template/Story'
 export default {
     async asyncData({params, $axios, redirect}) {
         try {
-            let dataStory = await storySerivce.get()
+            let dataStory = await storySerivce.get({relation: "category,user"})
             let stories = dataStory.data.stories.map(function (story) {
                 story.chaps = story.chaps.sort(function (a, b) {
                     return a.page - b.page

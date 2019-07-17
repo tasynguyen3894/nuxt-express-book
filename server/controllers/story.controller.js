@@ -4,11 +4,12 @@ const storyRepository = require('../repository/story.repository')
 
 function create(req, res, next) {
     var { name, tiny_info, category_id } = req.body
-
+    var currentUser = req.currentUser
     var story = new Story({
         name: name,
         tiny_info: tiny_info,
         category_id: category_id,
+        user_id: currentUser,
         chaps: [
         ]
     });
@@ -204,7 +205,7 @@ function edit(req, res, next) {
         return false;
     }
 
-    var { name, tiny_info, category_id } = req.body
+    var { name, tiny_info, category_id, user_id } = req.body
     let storyData = {}
     if(name) {
         storyData['name'] = name
@@ -216,6 +217,10 @@ function edit(req, res, next) {
 
     if(category_id) {
         storyData['category_id'] = category_id
+    }
+
+    if(user_id) {
+        storyData['user_id'] = user_id
     }
 
     Story.findByIdAndUpdate(storyId, storyData, {new: true}, function (errUpdate, dataUpdate) {

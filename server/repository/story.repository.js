@@ -5,7 +5,8 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const relateList = {
     category: "category_id",
-    chap_content: "chaps.content_id"
+    chap_content: "chaps.content_id",
+    user: "user_id"
 }
 
 function filterSearch(params, options) {
@@ -20,6 +21,12 @@ function filterSearch(params, options) {
         {
             key: "category_id",
             keyDB: "category_id",
+            compare: "equal",
+            type: ObjectId
+        },
+        {
+            key: "user_id",
+            keyDB: "user_id",
             compare: "equal",
             type: ObjectId
         },

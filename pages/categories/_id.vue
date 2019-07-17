@@ -8,13 +8,14 @@
 </template>
 <script>
 import Story from '~/components/template/Story'
+import storySerivce from '~/service/story.service'
 
 export default {
     async asyncData({params, $axios, redirect}) {
         
         try {
             let dataCategory = await $axios.get('/guess/categories/' + params.id)
-            let dataStory = await $axios.get('/guess/stories?category_id=' + params.id)
+            let dataStory = await storySerivce.get({category_id: params.id, relation: "category,user"})
             return {
                 id: params.id,
                 category: dataCategory.data.category,

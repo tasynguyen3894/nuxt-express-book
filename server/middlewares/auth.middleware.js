@@ -10,6 +10,7 @@ function auth(req, res, next) {
         return;
     } else {
         if(User.verifyToken(req.headers['tasy-book-token'])) {
+            req.currentUser = User.decodeToken(req.headers['tasy-book-token'])
             next()
             return true
         }

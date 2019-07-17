@@ -1,12 +1,17 @@
 const commonHelper = require('./common.helper')
 const categoryHelper = require('./category.helper')
 const chapHelper = require('./chap.helper')
+const userHelper = require('./user.helper')
 
 function singleTransform(data, options) {
     data = commonHelper.modelTransform(data)
     if(typeof data.category_id == 'object' && typeof data.category_id._bsontype == "undefined") {
         data.category = categoryHelper.modelTransform(data.category_id)
         delete data.category_id
+    }
+    if(typeof data.user_id == 'object' && typeof data.user_id._bsontype == "undefined") {
+        data.user = userHelper.modelTransform(data.user_id)
+        delete data.user_id
     }
     if(typeof data.chaps != "undefined") {
         if(typeof options.role === 'undefined' || options.role != 'admin') {

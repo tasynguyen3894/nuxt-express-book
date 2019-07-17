@@ -22,6 +22,11 @@ const storySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category'
     },
+    user_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     chaps: [
         chapSchema
     ]

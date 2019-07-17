@@ -36,7 +36,7 @@ userSchema.statics.authenticate = function(email, password, callback) {
         }
         bcrypt.compare(password, user.password, function (err, result) {
             if (result === true) {
-                return callback({ status: 200, token: jwt.sign({email: email}, process.env.secret_key) }, user);
+                return callback({ status: 200, token: jwt.sign({email: email, id: user.id}, process.env.secret_key) }, user);
             } else {
                 return callback({status: 404}, null);
             }
@@ -48,6 +48,15 @@ userSchema.statics.verifyToken = function (token) {
     try {
         var decoded = jwt.verify(token, process.env.secret_key)
         return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+userSchema.statics.decodeToken = function (token) {
+    try {
+        var decoded = jwt.verify(token, process.env.secret_key)
+        return decoded;
     } catch (error) {
         return false;
     }
