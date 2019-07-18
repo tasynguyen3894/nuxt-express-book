@@ -16,6 +16,11 @@ module.exports = {
       },
       width: {
         '950': '950px'
+      },
+      maxHeight: {
+        '50': '50px',
+        '100': '100px',
+        '150': '150px'
       }
     }
   },
