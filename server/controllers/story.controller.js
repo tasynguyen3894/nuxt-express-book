@@ -9,7 +9,7 @@ function create(req, res, next) {
         name: name,
         tiny_info: tiny_info,
         category_id: category_id,
-        user_id: currentUser,
+        user_id: currentUser.id,
         chaps: [
         ]
     });
