@@ -3,10 +3,11 @@ const contentHelper = require('../helpers/content.helper')
 
 function create(req, res, next) {
     var { text, title } = req.body
-    
+    var currentUser = req.currentUser
     var contentModel = new Content({
         text: text,
         title: title,
+        user_id: currentUser,
         notes: [
         ]
     });

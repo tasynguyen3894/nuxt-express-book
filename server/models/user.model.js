@@ -44,6 +44,22 @@ userSchema.statics.authenticate = function(email, password, callback) {
     });
 }
 
+userSchema.statics.resetPassword = function(email, password, callback) {
+    let passwordHash = bcrypt.hashSync(password, 10);
+    User.update({ email: email }, {password: passwordHash})
+    .exec(function (err, user) {
+        if (err) {
+            return callback({
+                status: false,
+                err: err
+            })
+        }
+        return callback({
+            status: true
+        })
+    });
+}
+
 userSchema.statics.verifyToken = function (token) {
     try {
         var decoded = jwt.verify(token, process.env.secret_key)

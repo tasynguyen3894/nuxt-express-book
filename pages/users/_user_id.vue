@@ -6,7 +6,7 @@
       <a v-bind:href="'mailto:'+user.email" class="text-teal-500" v-text="user.email"></a>
     </span>
     <h3 class="text-2xl font-bold border-b py-1">Stories</h3>
-    <div class="w-full flex">
+    <div class="w-full md:flex">
       <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
     </div>
   </div>

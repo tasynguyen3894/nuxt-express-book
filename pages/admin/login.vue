@@ -34,7 +34,8 @@ export default {
                 let { status, data } = response
                 if(status == 200 && data.token) {
                     let auth = {
-                        token: data.token
+                        token: data.token,
+                        user: data.user
                     }
                     _this.$store.commit('setAuth', auth)
                     Cookie.set('auth', auth)

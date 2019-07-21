@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex">
+    <div class="w-full md:flex">
         <Category v-bind:category="category" :key="category.id" v-for="category in categories" />
     </div>
 </template>

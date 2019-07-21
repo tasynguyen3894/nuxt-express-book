@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex">
+    <div class="w-full md:flex">
         <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
     </div>
 </template>

@@ -10,9 +10,6 @@ function index(req, res, next) {
         })
         return false;
     }
-    // Story.findOne({}).populate({path: 'chaps.content'}).exec(function (err, story) {
-    //     console.log(story.chaps[0].content)
-    // })
     Story.findOne({_id: storyId}).populate({path: 'chaps.content_id'}).exec(function (err, doc) {
         if(err) {
             res.status(404)
@@ -42,7 +39,7 @@ async function create(req, res, next) {
     if(!req.body.name) {
         res.status(422)
         res.json({
-            message: "name or alias mustn't be empty"
+            message: "name mustn't be empty"
         })
         return;
     }
@@ -64,9 +61,12 @@ async function create(req, res, next) {
                     })
                     return false
                 }
+                let chapCreated = doc.chaps.filter(function (chap) {
+                    return chap.page = page
+                })
                 res.status(200)
                 res.json({
-                    story: doc 
+                    chap: chapHelper.modelTransform(chapCreated[0]) 
                 })
                 return true
             })
@@ -91,7 +91,7 @@ function edit(req, res, next) {
         })
         return false;
     }
-    var { name, content_id } = req.body
+    var { name, content_id, page } = req.body
     var chapData = {
         
     }
@@ -100,6 +100,10 @@ function edit(req, res, next) {
     }
     if(content_id) {
         chapData["chaps.$.content_id"] = content_id
+    }
+
+    if(page) {
+        chapData["chaps.$.page"] = page
     }
 
     Story.findOneAndUpdate({_id: storyId, chaps: {$elemMatch: {_id: chapId}}}, {
@@ -122,7 +126,7 @@ function edit(req, res, next) {
         });
         res.status(200)
         res.json({
-            chap: chap[0]
+            chap: chapHelper.modelTransform(chap[0])
         })
         return true
     })
@@ -161,7 +165,7 @@ function publish(req, res, next) {
         });
         res.status(200)
         res.json({
-            chap: chap[0]
+            chap: chapHelper.modelTransform(chap[0])
         })
         return true
     })
@@ -180,7 +184,7 @@ function unpublish(req, res, next) {
 
     Story.findOneAndUpdate({_id: storyId, chaps: {$elemMatch: {_id: chapId}}}, {
         $set: {
-            published_at: null
+            "chaps.$.published_at": null
         }
     },
     {
@@ -200,7 +204,7 @@ function unpublish(req, res, next) {
         });
         res.status(200)
         res.json({
-            chap: chap[0]
+            chap: chapHelper.modelTransform(chap[0])
         })
         return true
     })
@@ -254,7 +258,7 @@ function findById(req, res, next) {
                         let chap = chaps[0]
                         res.status(200)
                         res.json({
-                            chap: chaps[0]
+                            chap: chapHelper.modelTransform(chap[0])
                         })
                         return true
                     }

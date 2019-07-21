@@ -7,8 +7,7 @@ const chapSchema = new Schema({
     },
     page: {
         type: Number,
-        required: true,
-        unique: true
+        required: true
     },
     content_id: {
         type: Schema.Types.ObjectId,

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="font-bold border-b text-2xl mb-1">{{ category.name }}</h1>
-        <div class="w-full flex">
+        <div class="w-full md:flex">
             <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
         </div>
     </div>

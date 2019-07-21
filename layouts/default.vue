@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class=" overflow-hidden">
     <DefaultHeader />
-    <div class="container mx-auto w-950 p-2">
+    <div class="container mx-auto md:w-950 p-2">
       <nuxt />
     </div>
     <DefaultFooter />

@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class=" overflow-hidden">
     <AdminHeader />
-    <nuxt />
+    <div class="container mx-auto md:w-950 p-2">
+      <nuxt />
+    </div>
   </div>
 </template>
 <script>
