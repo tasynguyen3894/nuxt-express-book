@@ -258,7 +258,7 @@ function findById(req, res, next) {
                         let chap = chaps[0]
                         res.status(200)
                         res.json({
-                            chap: chapHelper.modelTransform(chap[0])
+                            chap: chap
                         })
                         return true
                     }
