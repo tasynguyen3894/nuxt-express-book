@@ -18,7 +18,8 @@
             href="https://github.com/tasynguyen3894/nuxt-express-book"
             target="_blank"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-black border-white hover:border-white hover:text-black hover:bg-white mt-4 lg:mt-0"
-          >Github</a>
+            v-text="$store.state.auth.user.username"
+          ></a>
           <a
             @click="logout"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-twitter border-white hover:border-twitter hover:text-twitter hover:bg-white mt-4 lg:mt-0"

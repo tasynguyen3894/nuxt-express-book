@@ -1,6 +1,7 @@
 import utilService from './util.service'
 import axios from 'axios'
 const apiUrl = '/guess/categories'
+const apiAdminUrl = '/admin/categories'
 
 export default {
     get: function (params = {}) {
@@ -10,5 +11,23 @@ export default {
     },
     getById: function (id) {
         return axios.get(utilService.baseUrl + apiUrl + '/' + id);
+    },
+    admin: function(token = '') {
+        let headers = {
+            'tasy-book-token': token
+        };
+        return {
+            get: function (params = {}) {
+                return axios.get(utilService.baseUrl + apiAdminUrl, {
+                    params: params,
+                    headers: headers
+                });
+            },
+            getById: function (id) {
+                return axios.get(utilService.baseUrl + apiAdminUrl + '/' + id, {
+                    headers: headers
+                });
+            }
+        }
     }
 }

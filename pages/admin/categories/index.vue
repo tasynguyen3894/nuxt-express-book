@@ -15,10 +15,13 @@ import categorySerivce from '~/service/category.service'
 export default {
     layout: 'admin',
     middleware: 'authenticated',
-    async asyncData({params, $axios, redirect}) {
+    async asyncData({params, $axios, redirect, store}) {
         try {
-            var categoryDoc = await categorySerivce.get();
+            let token = store.state.auth.token
+            let categorySerivceAdmin = categorySerivce.admin(token)
+            var categoryDoc = await categorySerivceAdmin.get();
         } catch (error) {
+            console.log(error)
         }
         return {
             categories: categoryDoc.data.categories

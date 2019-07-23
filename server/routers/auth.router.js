@@ -6,5 +6,6 @@ route.post('/register', authController.register)
 route.post('', authController.user)
 // route.get('', authController.index)
 route.post('/login', authController.login)
+route.post('/refesh_token', authController.refesh_token)
 
 module.exports = route

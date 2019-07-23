@@ -1,9 +1,10 @@
-const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 mongoose.connect(process.env.mongodb_uri);
 const db = mongoose.connection;
 const bcrypt = require('bcrypt');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
+const moment = require('moment');
 
 const userSchema = new Schema({
     email: {
@@ -16,6 +17,13 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         required: true,
+        trim: true
+    },
+    fullname: {
+        type: String
+    },
+    reset_password: {
+        type: String,
         trim: true
     },
     password: {
@@ -36,7 +44,9 @@ userSchema.statics.authenticate = function(email, password, callback) {
         }
         bcrypt.compare(password, user.password, function (err, result) {
             if (result === true) {
-                return callback({ status: 200, token: jwt.sign({email: email, id: user.id}, process.env.secret_key) }, user);
+                let token = jwt.sign({email: email, id: user.id, expired_at: moment().add(8, 'hours')}, process.env.secret_key);
+                let refrestToken = jwt.sign({token: token}, process.env.secret_key);
+                return callback({ status: 200, token: token, refesh_token: refrestToken}, user);
             } else {
                 return callback({status: 404}, null);
             }

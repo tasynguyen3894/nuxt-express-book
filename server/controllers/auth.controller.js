@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const userHelper = require('../helpers/user.helper')
 const jwt = require('jsonwebtoken')
+const moment = require('moment')
 
 function register(req, res, next) {
 
@@ -24,7 +25,7 @@ function login(req, res, next) {
     User.authenticate(req.body.email, req.body.password, function (data, user) {
         res.status(data.status)
         if(data.status == 200) {
-            res.json({ user: userHelper.modelTransform(user), token: data.token })
+            res.json({ user: userHelper.modelTransform(user), token: data.token, refesh_token: data.refesh_token })
         } else {
             res.json({ message: 'Error', status: data.status })
         }
@@ -56,7 +57,7 @@ function user(req, res, next) {
     if(!decodeInfo || !decodeInfo.email) {
         res.status(401)
         res.json({
-            message: 'wrong token'
+            message: 'wrong token',
         })
         return false
     }
@@ -74,12 +75,52 @@ function user(req, res, next) {
         }) 
     })
     return true;
-    // jwt
+}
+
+function refesh_token(req, res, next) {
+    let {token, refesh_token} = req.body
+    if(!token || !refesh_token) {
+        res.status(401)
+        res.json({
+            message: "bad request"
+        })
+        return false
+    }
+    try {
+        let tokenDecoded = jwt.verify(token, process.env.secret_key)
+        let refeshTokenDecoded = jwt.verify(refesh_token, process.env.secret_key)
+        if(refeshTokenDecoded.token != token) {
+            res.status(401)
+            res.json({
+                message: "bad request"
+            })
+            return false;
+        }
+        let newToken = jwt.sign({
+                email: tokenDecoded.email, 
+                id: tokenDecoded.id, 
+                expired_at: moment().add(8, 'hours')
+            }, process.env.secret_key)
+        let newRefeshToken = jwt.sign({token: newToken}, process.env.secret_key);
+        res.status(201)
+        res.json({
+            token: newToken,
+            refesh_token: newRefeshToken
+        })
+        return true
+    } catch (error) {
+        res.status(401)
+        res.json({
+            message: "bad request"
+        })
+        return false;
+    }
 }
 
 module.exports = {
     register: register,
     login: login,
     index: index,
-    user: user
+    user: user,
+    refesh_token: refesh_token
 }
