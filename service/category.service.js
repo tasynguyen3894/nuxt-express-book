@@ -27,6 +27,18 @@ export default {
                 return axios.get(utilService.baseUrl + apiAdminUrl + '/' + id, {
                     headers: headers
                 });
+            },
+            update: function (id, data) {
+                return axios.put(utilService.baseUrl + apiAdminUrl + '/' + id, 
+                data, {
+                    headers: headers
+                });
+            },
+            create: function (data) {
+                return axios.post(utilService.baseUrl + apiAdminUrl + '/' + id, 
+                data, {
+                    headers: headers
+                });
             }
         }
     }
