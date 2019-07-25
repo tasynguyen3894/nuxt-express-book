@@ -35,7 +35,7 @@
         </select>
         <p class="text-red-500 text-xs italic" v-text="message"></p>
       </div>
-      <div class="flex items-center text-right">
+      <div class="flex flex-wrap items-center text-right">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"

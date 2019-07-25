@@ -7,7 +7,7 @@
                 </nuxt-link>
             </li>
         </ul> -->
-        <div class="flex">
+        <div class="flex flex-wrap">
             <Category :key="category.id" v-for="category in categories" v-bind:category="category" />
         </div>
     </div>
