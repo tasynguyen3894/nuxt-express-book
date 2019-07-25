@@ -7,8 +7,8 @@
       :to="{name: 'users-user_id', params: {user_id: story.user.id} }"
       v-text="story.user.username"
     ></nuxt-link>
-    <div class="flex border-t">
-      <div class="flex w-1/5 border-gray-400 py-2 pl-2">
+    <div class="flex flex-wrap border-t">
+      <div class="flex flex-wrap w-1/5 border-gray-400 py-2 pl-2">
         <ul class="block w-full">
           <li>
             <nuxt-link
@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-      <div class="flex w-4/5 border-l mr-5 pl-2">
+      <div class="flex flex-wrap w-4/5 border-l mr-5 pl-2">
         <div v-if="!chap_id" v-text="story.tiny_info" class="whitespace-pre-line py-2 w-full"></div>
         <nuxt-child/>
       </div>

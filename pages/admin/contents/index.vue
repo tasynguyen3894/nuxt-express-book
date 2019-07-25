@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex">
+        <div class="flex flex-wrap flex-wrap">
             <Content :key="content.id" v-for="content in contents" v-bind:content="content" />
         </div>
     </div>

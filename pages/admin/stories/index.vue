@@ -7,7 +7,7 @@
                 </nuxt-link>
             </li>
         </ul> -->
-        <div class="flex">
+        <div class="flex flex-wrap">
             <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
         </div>
     </div>
