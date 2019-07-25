@@ -7,11 +7,15 @@
           <nuxt-link
             :to="{name: 'admin-categories'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-          >Categories</nuxt-link>
-          <!-- <nuxt-link
-            :to="{name: 'about'}"
+          >Category</nuxt-link>
+          <nuxt-link
+            :to="{name: 'admin-stories'}"
             class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-          >About</nuxt-link> -->
+          >Story</nuxt-link>
+          <nuxt-link
+            :to="{name: 'admin-contents'}"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+          >Content</nuxt-link>
         </div>
         <div>
           <a
