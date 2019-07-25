@@ -8,30 +8,29 @@
             </li>
         </ul> -->
         <div class="flex">
-            <Category :key="category.id" v-for="category in categories" v-bind:category="category" />
+            <Story :key="story.id" v-for="story in stories" v-bind:story="story" />
         </div>
     </div>
 </template>
 <script>
-import categoryService from '~/service/category.service'
-import Category from '~/components/admin/Category'
+import storyService from '~/service/story.service'
+import Story from '~/components/admin/Story'
 
 export default {
     layout: 'admin',
     middleware: 'authenticated',
     components: {
-        Category
+        Story
     },
     async asyncData({params, $axios, redirect, store}) {
         try {
             let token = store.state.auth.token
-            let categoryServiceAdmin = categoryService.admin(token)
-            var categoryDoc = await categoryServiceAdmin.get();
+            let storyServiceAdmin = storyService.admin(token)
+            var storyDoc = await storyServiceAdmin.get();
         } catch (error) {
-            console.log(error)
         }
         return {
-            categories: categoryDoc.data.categories
+            stories: storyDoc.data.stories
         }
     }
 }

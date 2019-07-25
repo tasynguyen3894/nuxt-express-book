@@ -1,7 +1,7 @@
 import utilService from './util.service'
 import axios from 'axios'
-const apiUrl = '/guess/stories';
-const apiAdminUrl = '/admin/stories'
+const apiUrl = '/guess/contents';
+const apiAdminUrl = '/admin/contents'
 
 export default {
     get: function (params = {}) {
