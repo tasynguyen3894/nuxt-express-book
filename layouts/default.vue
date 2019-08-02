@@ -1,5 +1,5 @@
 <template>
-  <div class=" overflow-hidden">
+  <div class="overflow-hidden">
     <DefaultHeader />
     <div class="container mx-auto md:w-950 p-2">
       <nuxt />
