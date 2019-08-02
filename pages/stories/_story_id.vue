@@ -7,7 +7,7 @@
       :to="{name: 'users-user_id', params: {user_id: story.user.id} }"
       v-text="story.user.username"
     ></nuxt-link>
-    <div class="flex flex-wrap border-t">
+    <div class="flex border-t">
       <div class="flex flex-wrap w-1/5 border-gray-400 py-2 pl-2">
         <ul class="block w-full">
           <li>
