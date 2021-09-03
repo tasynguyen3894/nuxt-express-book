@@ -1,12 +1,11 @@
 <template>
     <div>
-        <!-- <ul>
-            <li :key="category.id" v-for="category in categories">
-                <nuxt-link :to="{name: 'admin-categories-id', params: {id: category.id} }">
-                    {{ category.name }}
-                </nuxt-link>
-            </li>
-        </ul> -->
+        <div class="text-lg font-bold">Category</div>
+        <div>
+            <nuxt-link :to="{name: 'admin-categories-create'}">
+                Create
+            </nuxt-link>
+        </div>
         <div class="flex flex-wrap">
             <Category :key="category.id" v-for="category in categories" v-bind:category="category" />
         </div>

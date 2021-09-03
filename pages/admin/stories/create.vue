@@ -39,14 +39,8 @@
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
-          @click="edit"
-        >Edit</button>
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
-          type="button"
-          @click="toggelePublish"
-          v-text="story.published_at ? 'Unpublish' : 'Publish'"
-        ></button>
+          @click="create"
+        >Create</button>
       </div>
     </div>
   </div>
@@ -61,16 +55,16 @@ export default {
   async asyncData({ params, $axios, redirect, store }) {
     try {
       let token = store.state.auth.token;
-      let storyServiceAdmin = storyService.admin(token);
       let categoryServiceAdmin = categoryService.admin(token);
-      var storyDoc = await storyServiceAdmin.getById(params.story_id);
       var categoryDoc = await categoryServiceAdmin.get();
-      var story = storyDoc.data.story;
       var categories = categoryDoc.data.categories;
       return {
-        story: story,
-        categories: categories,
-        id: params.story_id
+        story: {
+          name: '',
+          tiny_info: '',
+          category_id: null
+        },
+        categories: categories
       };
     } catch (err) {
       redirect("/");
@@ -89,48 +83,13 @@ export default {
     this.categoryServiceAdmin = categoryService.admin(token);
   },
   methods: {
-    toggelePublish() {
-      if(this.story.published_at) {
-        this.unpublish();
-      } else {
-        this.publish();
-      }
-    },
-    publish() {
+    create() {
       let _this = this;
       this.storyServiceAdmin
-        .publish(this.id)
+        .create(this.story)
         .then(function(res) {
           if (res.status == 200) {
-            _this.message = "Publish successfully";
-            _this.story = res.data.story;
-          }
-        })
-        .catch(function(error) {
-          _this.message = "Error";
-        });
-    },
-    unpublish() {
-      let _this = this;
-      this.storyServiceAdmin
-        .unpublish(this.id)
-        .then(function(res) {
-          if (res.status == 200) {
-            _this.story.published_at = null;
-            _this.message = "Update successfully";
-          }
-        })
-        .catch(function(error) {
-          _this.message = "Error";
-        });
-    },
-    edit() {
-      let _this = this;
-      this.storyServiceAdmin
-        .update(this.id, this.story)
-        .then(function(res) {
-          if (res.status == 200) {
-            _this.message = "Update success";
+            _this.message = "Create successfully";
           }
         })
         .catch(function(error) {

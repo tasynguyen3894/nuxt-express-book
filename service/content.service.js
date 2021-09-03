@@ -33,7 +33,7 @@ export default {
                 });
             },
             create: function (data) {
-                return axios.post(utilService.baseUrl + apiAdminUrl + '/' + id, 
+                return axios.post(utilService.baseUrl + apiAdminUrl, 
                 data, {
                     headers: headers
                 });

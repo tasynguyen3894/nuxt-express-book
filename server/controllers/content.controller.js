@@ -7,16 +7,16 @@ function create(req, res, next) {
     var contentModel = new Content({
         text: text,
         title: title,
-        user_id: currentUser,
+        user_id: currentUser.id,
         notes: [
         ]
     });
     contentModel.save(function (err, content) {
         if(err) {
-            res.status(422)
+            res.status(422);
             res.json({
                 message: 'system error'
-            })
+            });
             return
         }
         res.status(200)
@@ -118,7 +118,7 @@ function edit(req, res, next) {
         }
         res.status(200)
         res.json({
-            content: dataUpdate.transform()
+            content: contentHelper.modelTransform(dataUpdate)
         })
         return true
     })

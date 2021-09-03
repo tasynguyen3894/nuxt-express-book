@@ -11,6 +11,7 @@ mongoose.connect(process.env.mongodb_uri);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('open', function () {
+    console.log('Connect successfully');
 })
 
 // Import and Set Nuxt.js options

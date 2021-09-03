@@ -76,7 +76,8 @@ function publish(req, res, next) {
         }
         res.status(200)
         res.json({
-            message: 'Publish complete'
+            message: 'Publish complete',
+            story: storyHelper.modelTransform(dataUpdate, {role: 'admin'})
         })
         return true
     })

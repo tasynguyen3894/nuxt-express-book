@@ -26,5 +26,13 @@ const contentSchema = new Schema({
     }
 });
 
+contentSchema.method('transform', function () {
+    let obj = this.toObject();
+    obj.id = obj._id
+    delete obj._id
+    delete obj.__v
+    return obj
+})
+
 const Content = db.model('Content', contentSchema)
 module.exports = Content

@@ -32,8 +32,20 @@ export default {
                     headers: headers
                 });
             },
+            publish: function (id) {
+                return axios.post(utilService.baseUrl + apiAdminUrl + '/' + id + '/publish', 
+                null, {
+                    headers: headers
+                });
+            },
+            unpublish: function (id) {
+                return axios.post(utilService.baseUrl + apiAdminUrl + '/' + id + '/unpublish', 
+                null, {
+                    headers: headers
+                });
+            },
             create: function (data) {
-                return axios.post(utilService.baseUrl + apiAdminUrl + '/' + id, 
+                return axios.post(utilService.baseUrl + apiAdminUrl, 
                 data, {
                     headers: headers
                 });
