@@ -28,7 +28,7 @@
     "mongoose-unique-array": "^0.3.1",
     "nuxt": "^2.4.0",
     "popper.js": "^1.15.0",
-    "terminal-kit": "^1.28.19"
+    "terminal-kit": "^2.1.8"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
